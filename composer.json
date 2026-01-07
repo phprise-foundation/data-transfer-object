@@ -1,0 +1,32 @@
+{
+    "name": "phprise/data-transfer-object",
+    "description": "The initial Data Transfer Object to generate your own DTOs applying OTAKU philosophy",
+    "type": "library",
+    "require": {
+        "phprise/common-value-object": "^1.0",
+        "phprise/common-contract": "^1.0",
+        "doctrine/collections": "^2.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12.5",
+        "vimeo/psalm": "^6.14"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Phprise\\DataTransferObject\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Phprise\\Test\\DataTransferObject\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Esdras Schonevald",
+            "email": "esdras.schonevald@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
