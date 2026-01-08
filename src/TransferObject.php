@@ -13,7 +13,7 @@ use ReflectionProperty;
 use RuntimeException;
 use Stringable;
 
-abstract class TransferObject implements Stringable
+abstract class TransferObject implements Stringable, TransferObjectInterface
 {
     public function toArray(): array
     {
