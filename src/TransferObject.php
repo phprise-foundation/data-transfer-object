@@ -15,6 +15,8 @@ use Stringable;
 
 abstract class TransferObject implements Stringable, TransferObjectInterface
 {
+    #[\Override]
+    /** @psalm-return array<array-key, mixed> */
     public function toArray(): array
     {
         $ref    =   new ReflectionClass($this);
@@ -23,6 +25,7 @@ abstract class TransferObject implements Stringable, TransferObjectInterface
         return $this->extractProperties($props);
     }
 
+    #[\Override]
     public static function fromArray(array $array): static
     {
         $static =   new static();
@@ -37,12 +40,15 @@ abstract class TransferObject implements Stringable, TransferObjectInterface
         return $static;
     }
 
+    #[\Override]
+    /** @psalm-return array<string, mixed> */
     public function toSnakeCaseArray(): array
     {
         $array = $this->toArray();
         return $this->arrayKeysCamelToSnake($array);
     }
 
+    #[\Override]
     public function toJson(): string
     {
         $json = json_encode($this->toArray());
@@ -54,6 +60,7 @@ abstract class TransferObject implements Stringable, TransferObjectInterface
         return $json;
     }
 
+    #[\Override]
     public static function fromJson(string $json): static
     {
         $decoded = json_decode($json, true);
@@ -64,6 +71,7 @@ abstract class TransferObject implements Stringable, TransferObjectInterface
         return static::fromArray($decoded);
     }
 
+    #[\Override]
     public function toSnakeCaseJson(): string
     {
         $json = json_encode($this->toSnakeCaseArray());
@@ -77,6 +85,7 @@ abstract class TransferObject implements Stringable, TransferObjectInterface
 
     /**
      * @psalm-suppress MixedAssignment
+     * @psalm-return array<array-key, mixed>
      */
     private static function arrayKeysSnakeToCamel(array $array): array
     {
@@ -93,6 +102,7 @@ abstract class TransferObject implements Stringable, TransferObjectInterface
 
     /**
      * @psalm-suppress MixedAssignment
+     * @psalm-return array<string, mixed>
      */
     private function arrayKeysCamelToSnake(array $array): array
     {
@@ -145,6 +155,7 @@ abstract class TransferObject implements Stringable, TransferObjectInterface
      * @param string $marker Indicates a variable into the query (Default ':')
      * @return string formated string
      */
+    #[\Override]
     public function format(
         array|string $queries,
         array $aliases = [],
@@ -175,6 +186,7 @@ abstract class TransferObject implements Stringable, TransferObjectInterface
      * @param class-string<T>|T $entity
      * @return T
      */
+    #[\Override]
     public function toEntity(string|object $entity): object
     {
         /** @psalm-suppress MixedArgument */
