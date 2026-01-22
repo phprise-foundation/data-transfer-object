@@ -276,6 +276,10 @@ abstract class TransferObject implements Stringable, TransferObjectInterface
      */
     private function extractProperty(ReflectionProperty $prop, array &$data): void
     {
+        if (!$prop->isInitialized($this)) {
+            return;
+        }
+    
         $name   =   $prop->getName();
         $value  =   $prop->getValue($this);
 
